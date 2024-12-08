@@ -93,7 +93,7 @@ class ResNet2d(nn.Module):
         factor: int,
         stride: Tuple[int, int]
     ) -> None:
-        # https://arxiv.org/pdf/2005.00341.pdf
+        # Method from https://arxiv.org/pdf/2005.00341.pdf
         # The original paper uses layer normalization, but here
         # we use batch normalization.
         super().__init__()
@@ -228,7 +228,7 @@ class weighting(nn.Module):
 
 
 class WaveDiscriminator(nn.Module):
-    r"""MelGAN discriminator from https://arxiv.org/pdf/1910.06711.pdf
+    """MelGAN discriminator from https://arxiv.org/pdf/1910.06711.pdf
     """
     def __init__(self, resolution: int = 1, n_channels: int = 4) -> None:
         super().__init__()
@@ -382,7 +382,6 @@ class NGAN(pl.LightningModule):
             
         g_rec_loss = self.rec_loss(output[:, 0, :], input_orig[:, 0, :])
         
-        #g_loss = 3*l_g/K_scale + 3*l_feat/KL_scale + (l_t / 10) + g_rec_loss
         loss_1 = l_g/K_scale
         loss_2 = l_feat/KL_scale
         loss_3 = l_t
@@ -483,14 +482,16 @@ def train():
         target_sample_rate=48000,
         segment_length=24000,
         padding='same')
-    #checkpoint = torch.load('versatility/weighting/versatile-v14.ckpt')['state_dict']     
-    #model.load_state_dict(checkpoint)
-    #torch.save(model.superResolver.state_dict(), 'generators/w4.ckpt')
+     #During training can load weights from checkpoint
+     ## checkpoint = torch.load('./models/generator_discrim.ckpt')['state_dict']
+     #Can save weights for just the geneartor for inference at end of training
+     ## model.load_state_dict(checkpoint)
+     ## torch.save(model.superResolver.state_dict(), 'generators/n1x.ckpt')
     trainer = pl.Trainer(
         max_epochs=100,
         precision='32',
         logger=pl.loggers.CSVLogger("."),
-        # logger=pl.loggers.TensorBoardLogger("lightning_logs", name="soundstream"),
+        # set file name and directory name for checkpoints
         callbacks=[
             pl.callbacks.ModelCheckpoint(save_last=True, every_n_train_steps=50000, filename='versatile', dirpath='./versatility/weighting/')
         ],

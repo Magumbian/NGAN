@@ -19,8 +19,8 @@ class MyTestee(BasicTestee):
                 target_sample_rate=48000,         
                 segment_length=24000,         
                 padding='same').to(device)
-        #self.checkpoint = torch.load('generators/w4.ckpt')
-        self.checkpoint = torch.load('generators/n8.ckpt')
+        #self.checkpoint = torch.load('generators/w4.ckpt') #To load load balanced model 
+        self.checkpoint = torch.load('generators/n8.ckpt') #For best performing 8 channel model
 
     
     def cubic_upsampler(self, audio_signal, input_rate, target_rate):  
@@ -31,7 +31,7 @@ class MyTestee(BasicTestee):
         upsampled_audio = cubic_spline(target_time)     
         return upsampled_audio
     def infer(self, x):
-        x = self.cubic_upsampler(x, 8000, 48000)
+        x = self.cubic_upsampler(x, 8000, 48000) #for 8KHz input
         x = torch.tensor(x.copy(), dtype=torch.float32).to(self.device)
         x = x.unsqueeze(dim=0)
         j = [x, x]
