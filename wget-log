@@ -1,0 +1,15 @@
+--2024-02-07 10:18:31--  https://zenodo.org/record/6370601/files/vctk_test_48k.tar?download=1
+Resolving zenodo.org (zenodo.org)... 188.185.79.172, 188.184.98.238, 188.184.103.159, ...
+Connecting to zenodo.org (zenodo.org)|188.185.79.172|:443... connected.
+HTTP request sent, awaiting response... 301 MOVED PERMANENTLY
+Location: /records/6370601/files/vctk_test_48k.tar [following]
+--2024-02-07 10:18:31--  https://zenodo.org/records/6370601/files/vctk_test_48k.tar
+Reusing existing connection to zenodo.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 369221545 (352M) [application/octet-stream]
+Saving to: ‘../../../halfstream/vctk/test/vctk_test.tar’
+
+../../../halfstream/vctk/test/vctk_test  30%[======================>                                                       ] 108.06M  --.-KB/s    eta 6h 32m ../../../halfstream/vctk/test/vctk_test  30%[======================>                                                       ] 108.06M  --.-KB/s    in 2h 53m  
+
+2024-02-07 13:12:22 (10.6 KB/s) - Read error at byte 113305802/369221545 (Connection timed out). Retrying.
+

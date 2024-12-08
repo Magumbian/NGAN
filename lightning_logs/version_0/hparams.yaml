@@ -1,0 +1,9 @@
+n_channels: 1
+padding: same
+batch_size: 32
+target_sample_rate: 48000
+segment_length: 24000
+lr: 0.0001
+b1: 0.5
+b2: 0.9
+dataset: librispeech-dev
