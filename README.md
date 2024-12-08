@@ -8,7 +8,7 @@ For details of settings see the repository https://github.com/haoheliu/ssr_eval/
 
 Code Acknowledgments
 
-We have resused code from the following repositories
+We have reused code from the following repositories
 1. https://github.com/haoheliu/ssr_eval/tree/main
 2. https://github.com/ZhikangNiu/encodec-pytorch
 3. https://github.com/kaiidams/soundstream-pytorch
