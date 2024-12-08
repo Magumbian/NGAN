@@ -1,4 +1,3 @@
-# Copyright (C) 2023 Katsuya Iida. All rights reserved.
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "2"
 import random
@@ -266,11 +265,9 @@ class NGAN(pl.LightningModule):
         train_data: str = None,
         lr: float = 1e-4,
         b1: float = 0.5,
-        b2: float = 0.9,
-        dataset: str = 'librispeech'
+        b2: float = 0.9
     ) -> None:
-        # https://arxiv.org/pdf/2009.02095.pdf
-        # 2. Method
+        # Method from https://arxiv.org/pdf/2009.02095.pdf
         # SEANet uses Adam with lr=1e-4, beta1=0.5, beta2=0.9
         # batch_size=16
         super().__init__()
@@ -420,18 +417,19 @@ class NGAN(pl.LightningModule):
 def train():
     model = NGAN(
         batch_size = 32,
-        padding = 'same',
-        dataset = 'librispeech-dev')
-    #checkpoint = torch.load('versatility/small/versatile-v5.ckpt')['state_dict']     
-    #model.load_state_dict(checkpoint)
-    #torch.save(model.superResolver.state_dict(), 'generators/n1x.ckpt')
+        padding = 'same')
+    #During training can load weights from checkpoint
+    ## checkpoint = torch.load('./models/generator_discrim.ckpt')['state_dict']     
+    #Can save weights for just the geneartor for inference at end of training
+    ## model.load_state_dict(checkpoint)
+    ## torch.save(model.superResolver.state_dict(), 'generators/n1x.ckpt')
     trainer = pl.Trainer(
         max_epochs=200,
         precision='16-mixed',
         logger=pl.loggers.CSVLogger("."),
-        # logger=pl.loggers.TensorBoardLogger("lightning_logs", name="soundstream"),
+        # set file name and directory name for checkpoints
         callbacks=[
-            pl.callbacks.ModelCheckpoint(save_last=True, every_n_train_steps=50000, filename='versatile', dirpath='./versatility/small/')
+            pl.callbacks.ModelCheckpoint(save_last=True, every_n_train_steps=50000, filename='generator_discrim', dirpath='./models')
         ],
     )
     trainer.fit(
@@ -445,4 +443,4 @@ if __name__ == "__main__":
     train()    
 
     
-       
+

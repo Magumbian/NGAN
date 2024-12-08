@@ -1,4 +1,3 @@
-# Copyright (C) 2023 Katsuya Iida. All rights reserved.
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "2"
 import random
