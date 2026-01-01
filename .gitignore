@@ -1,0 +1,4 @@
+__psycache__
+/results/*
+!/results/.gitkeep
+lightning_logs/
